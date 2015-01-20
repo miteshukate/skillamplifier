@@ -1,0 +1,11 @@
+@* uploadQuestionFile Template File *@
+
+@()
+@main("Upload File"){
+	
+	<form action ="@routes.QuestionController.processFile()" enctype= "multipart/form-data" method="POST">
+            <input type="file" name="picture" accept="application/pdf" multiple="multiple"><br/> 
+            <input type="submit" value="upload"> 
+</form>
+	
+}

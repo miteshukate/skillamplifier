@@ -1,0 +1,18 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+     </head>
+    <body>		
+    			@if(flash().get("alert") != null){
+  				<div class="alert @flash().get("alert").split("~")(0)">
+  					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  					<big>@flash().get("alert").split("~")(1)</big>
+  				</div>
+  				}
+    			@content
+    </body>
+</html>
