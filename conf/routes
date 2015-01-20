@@ -3,7 +3,22 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Application.landingPage()
+GET     /working                    controllers.Application.index()
+GET		/register/admin				controllers.Application.registerAdmin()
+GET		/register/candidate			controllers.UserController.registerCandidate()
+POST	/register/candidate 		controllers.UserController.processCandidateRegister()	
+POST	/register/admin				controllers.Application.registerAdminProccess()
+GET		/login						controllers.LoginController.login()
+POST		/login-process				controllers.LoginController.processLogin()
+GET		/logout						controllers.LoginController.processLogout()
 
+
+#Question
+GET 	/question-form			controllers.QuestionController.displayFillQuestionForm()
+POST	/process-question		controllers.QuestionController.processQuestionForm()
+GET		/display-fileupload-form controllers.QuestionController.displayFileUploadForm()
+POST	/process-file			controllers.QuestionController.processFile()
+GET		/display-question		controllers.QuestionController.getQuestion()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
