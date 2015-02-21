@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -24,10 +25,18 @@ public class Question extends BaseEntity {
 	public String questionName;
 
 	@OneToMany(cascade=CascadeType.ALL)
-	public List<Option> optionList=new ArrayList<Option>();
+	public List<Option> optionList = new ArrayList<Option>();
 
 	@OneToMany(cascade=CascadeType.ALL)
-	public List<Answer> answerList=new ArrayList<Answer>();
+	public List<Answer> answerList = new ArrayList<Answer>();
+	
+	
+	public Date createdDate;
+	
+	
+	public AppUser CreatedBy;
+		
+	public QuestionType questionType;
 
 	public static Model.Finder<Long, Question> find = new Finder<Long, Question>(Long.class, Question.class);
 

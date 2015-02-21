@@ -1,16 +1,16 @@
 package controllers;
 
+import helpers.Alert;
+
 import java.util.List;
 
 import models.AppUser;
 import models.Role;
 import beans.LoginBean;
-
 import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-
 import utils.Constants;
 
 public class LoginController extends Controller{
@@ -18,6 +18,7 @@ public class LoginController extends Controller{
 	public static final Form<LoginBean> loginForm = Form.form(LoginBean.class);
 
 	public static Result login(){
+		Logger.debug("ok");
 		return ok(views.html.login.render(loginForm));
 	}
 
@@ -33,12 +34,15 @@ public class LoginController extends Controller{
 			final List<AppUser> appUsers = AppUser.find.where().eq("email", loginBean.email).eq("password", loginBean.password).findList();
 			if(appUsers.size() < 1) {
 				Logger.error("Invalid username/password");
+				flash().put("alert", new Alert("alert-error","Wrong User Name Or Password.").toString());
 				return badRequest(views.html.login.render(filledForm));
 			}
 			if(appUsers.size() == 1) {
 				session().clear();
 				session(Constants.LOGGED_IN_USER_ID, appUsers.get(0).id + "");
 				session(Constants.LOGGED_IN_USER_ROLE, appUsers.get(0).role+ "");
+				flash().put("alert", new Alert("alert-success","Login Successfully.").toString());
+				
 				if(appUsers.get(0).role.equals(Role.CANDIDATE)){
 					return ok(views.html.candidate.dashboard.render());
 				}else{
@@ -75,8 +79,14 @@ public class LoginController extends Controller{
 		return session(Constants.LOGGED_IN_USER_ID) == null ? false : true;
 	}
 
-	public static String getLoggedInUserRole() {
-		return session(Constants.LOGGED_IN_USER_ROLE);
+	/*review
+	 * 	
+	 */
+	
+	public static Role getLoggedInUserRole() {
+		//return session(Constants.LOGGED_IN_USER_ROLE);
+		return Role.ADMIN;
+
 	}
 
 }

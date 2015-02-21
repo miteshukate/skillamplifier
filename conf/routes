@@ -20,5 +20,11 @@ POST	/process-question		controllers.QuestionController.processQuestionForm()
 GET		/display-fileupload-form controllers.QuestionController.displayFileUploadForm()
 POST	/process-file			controllers.QuestionController.processFile()
 GET		/display-question		controllers.QuestionController.getQuestion()
+
+
+#SAMPLE
+GET		/sample/create-admin		controllers.SampleController.createSampleAdmin()
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
